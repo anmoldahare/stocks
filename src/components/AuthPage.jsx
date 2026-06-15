@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Lock, AlertCircle, ArrowRight, X } from 'lucide-react';
+import { API_BASE } from '../config';
 
 const AuthPage = ({ onClose, onLoginSuccess }) => {
-  const API_BASE = import.meta.env.VITE_API_URL || '';
+
   const [isLogin, setIsLogin] = useState(true);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

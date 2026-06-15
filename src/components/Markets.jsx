@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { TrendingUp, TrendingDown, Activity, Globe, DollarSign, Star, ChevronDown, Search } from 'lucide-react';
+import { API_BASE } from '../config';
 
 const marketData = {
   Crypto: [
@@ -58,7 +59,7 @@ const Markets = ({ searchQuery = '' }) => {
 
     const fetchSentiment = async () => {
       try {
-        const res = await fetch('/api/markets/sentiment');
+        const res = await fetch(`${API_BASE}/api/markets/sentiment`);
         if (!res.ok) throw new Error('Sentiment response was not ok');
         const data = await res.json();
         if (!mounted) return;
@@ -85,7 +86,7 @@ const Markets = ({ searchQuery = '' }) => {
 
     const fetchPrices = async () => {
       try {
-        const res = await fetch('/api/markets/prices');
+        const res = await fetch(`${API_BASE}/api/markets/prices`);
         if (!res.ok) throw new Error('Network response was not ok');
         const data = await res.json();
         if (!mounted) return;

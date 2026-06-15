@@ -15,7 +15,25 @@ const authRoutes = require('./routes/auth');
 const marketsRoutes = require('./routes/markets');
 
 const app = express();
-app.use(cors());
+
+// CORS: Allow both local dev and deployed Vercel frontend
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  process.env.FRONTEND_URL, // e.g. https://your-app.vercel.app
+].filter(Boolean);
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+}));
 app.use(express.json());
 
 app.get('/', (req, res) => res.send('Backend is working!'));

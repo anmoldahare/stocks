@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { User, Shield, CreditCard, Save, Eye, EyeOff, Check, Lock, Smartphone } from 'lucide-react';
+import { API_BASE } from '../config';
 
 const SettingsPage = ({ user }) => {
-  const API_BASE = import.meta.env.VITE_API_URL || '';
+
   const [activeTab, setActiveTab] = useState('profile');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
