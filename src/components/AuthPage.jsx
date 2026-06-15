@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Lock, AlertCircle, ArrowRight, X } from 'lucide-react';
 
 const AuthPage = ({ onClose, onLoginSuccess }) => {
+  const API_BASE = import.meta.env.VITE_API_URL || '';
   const [isLogin, setIsLogin] = useState(true);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -23,7 +24,7 @@ const AuthPage = ({ onClose, onLoginSuccess }) => {
 
     try {
       const endpoint = isLogin ? 'login' : 'register';
-      const response = await fetch(`http://localhost:5001/api/auth/${endpoint}`, {
+      const response = await fetch(`${API_BASE}/api/auth/${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

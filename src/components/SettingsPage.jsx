@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { User, Shield, CreditCard, Save, Eye, EyeOff, Check, Lock, Smartphone } from 'lucide-react';
 
 const SettingsPage = ({ user }) => {
+  const API_BASE = import.meta.env.VITE_API_URL || '';
   const [activeTab, setActiveTab] = useState('profile');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -117,7 +118,7 @@ const SettingsPage = ({ user }) => {
                   <button onClick={async () => {
                     try {
                       const token = localStorage.getItem('token');
-                      const res = await fetch('http://localhost:5001/api/auth/update-profile', {
+                      const res = await fetch(`${API_BASE}/api/auth/update-profile`, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                         body: JSON.stringify({ name: `${firstName} ${lastName}`.trim(), email: emailState })
