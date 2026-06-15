@@ -33,6 +33,12 @@ const AuthPage = ({ onClose, onLoginSuccess }) => {
         body: JSON.stringify(isLogin ? { email, password } : { name, email, password }),
       });
 
+      // Check if response is JSON before parsing
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Backend server is not reachable. Please check your connection.');
+      }
+
       const data = await response.json();
 
       if (!response.ok) {
